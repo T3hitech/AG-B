@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { validation } = require('../utils/validation');
-const mail = require('../modules/sendMail');
-const dbOps = require('../modules/dbOps');
-const Joi = require('joi');
+
 const { signUpuser } = require('../modules/userRegistration');
 
 router.post('/', async (req, res) => {

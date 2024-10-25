@@ -27,15 +27,16 @@ const signUpuser = (userDetails) => {
             try {
                 let userAdd = await dbOps.pushUser(userDetails);
                 if (userAdd.error == false) {
-                    try {
-                        let result = await mail.sendMail(userDetails);
-                        if (result.error == false) {
-                            result.msg = 'email sent for activation';
-                            resolve(result);
-                        }
-                    } catch (err) {
-                        reject(err);
-                    }
+                    // try {
+                    //     let result = await mail.sendMail(userDetails);
+                    //     if (result.error == false) {
+                    //         result.msg = 'email sent for activation';
+                    //         resolve(result);
+                    //     }
+                    // } catch (err) {
+                    //     reject(err);
+                    // }
+                    resolve(userAdd);
                 } else {
                     reject(err);
                 }

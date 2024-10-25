@@ -5,6 +5,7 @@ const cors = require('cors')
 const signup = require('./routes/signup');
 const verify = require('./routes/emailVerify');
 const login = require('./routes/login');
+const stripe = require('./routes/stripePayment');
 const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors({
@@ -14,6 +15,7 @@ app.use(cors({
 app.use('/signup', signup);
 app.use('/verify', verify);
 app.use('/login', login);
+app.use('/stripe', stripe);
 
 app.get('/', (req, res) => {
     res.send('success');
