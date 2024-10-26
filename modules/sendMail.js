@@ -23,13 +23,19 @@ var mailOptions = {
 const sendMail = (user) => {
   return new Promise((resolve, reject) => {
     const htmlTemplate = `
-        <h4>Dear ${user.username}(${user.email}),</h4>
-        <p>We have received the request from you (${user.username}) for registering into the website of Alergia-Quest.com.</p>
-        <p>Thanks for showing interesting to subscribe. To activate your email id to receive more information, please click below button.</p>
-    
-        <a href="http://localhost:3000/verify/search?search=${Buffer.from(user.username).toString('base64')}" class="rbl">Activate here</a>
-    `;
-    mailOptions.to = user.email;
+        <h3>Password Recovery Request</h3>
+        <h4>Hello ${user.USERNAME}(${user.EMAIL}),</h4>
+        <p>We received a request to reset your password. If you did not request a
+        password recovery, please ignore this email.</p>
+
+        <span>Here is your password: <h3>${Buffer.from(user.PASSCODE, 'base64').toString('ascii')}</h3></span>
+        
+        <h5>Thanks,</h5>
+        <h6>Algeria Quest Support Team</h6>
+        `;
+
+
+    mailOptions.to = user.EMAIL;
     mailOptions.html = htmlTemplate;
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {

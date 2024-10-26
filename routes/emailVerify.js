@@ -15,7 +15,7 @@ router.post('/search', async (req, res) => {
         //     res.status(400).send(response);
         // }
     } catch (err) {
-        res.status(400).send(err);
+        res.status(200).send(err);
     }
 })
 

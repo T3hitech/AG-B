@@ -1,7 +1,6 @@
 const express = require('express');
-const Joi = require('joi');
 const router = express.Router();
-const { getLoginToken, getLogin } = require('../modules/userRegistration');
+const { getLoginToken, getLogin, getForwardPw } = require('../modules/userRegistration');
 require('dotenv').config();
 
 router.post('/getToken', async (req, res) => {
@@ -11,10 +10,10 @@ router.post('/getToken', async (req, res) => {
         if (response) {
             res.status(200).send(response);
         } else {
-            res.status(400).send(response);
+            res.status(200).send(response);
         }
     } catch (err) {
-        res.status(400).send(err);
+        res.status(200).send(err);
     }
 })
 
@@ -25,10 +24,20 @@ router.get('/getLogin', async (req, res) => {
         if (response) {
             res.status(200).send(response);
         } else {
-            res.status(400).send(response);
+            res.status(200).send(response);
         }
     } catch (err) {
-        res.status(400).send(err);
+        res.status(200).send(err);
+    }
+})
+
+router.post('/forgotpw', async (req, res) => {
+    let email = req.body;
+    try {
+        let response = await getForwardPw(email);
+        res.status(200).send(response);
+    } catch (err) {
+        res.status(200).send(err);
     }
 })
 

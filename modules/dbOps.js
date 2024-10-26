@@ -69,4 +69,24 @@ const updateUser = (username) => {
     })
 }
 
-module.exports = { pushUser, getUser, updateUser };
+const getPw = (email) => {
+    return new Promise(async (resolve, reject) => {
+        let dbResponse = {};
+        try {
+            let result = await kDB('USER_ACTIVATION').where({ EMAIL: email });
+            if (result.error || result.length == 0) {
+                dbResponse.error = 'User Not Found';
+                reject(validation(dbResponse));
+            } else {
+                // let decodeParam = Buffer.from(result[0].PASSCODE, 'base64').toString('ascii');
+                // dbResponse = decodeParam;
+                resolve(validation(result[0]));
+            }
+        } catch (err) {
+            dbResponse.error = err.sqlMessage;
+            reject(validation(dbResponse));
+        }
+    })
+}
+
+module.exports = { pushUser, getUser, updateUser, getPw };

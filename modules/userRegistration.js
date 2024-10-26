@@ -11,10 +11,15 @@ const signupSchema = Joi.object({
     username: Joi.string().required(),
     passcode: Joi.string().min(5).max(20).required()
 });
+
 const loginSchema = Joi.object({
     username: Joi.string().required(),
     passcode: Joi.string().min(5).max(20).required()
 });
+
+const emailSchema = Joi.object({
+    email: Joi.string().required().min(8).max(50)
+})
 
 const signUpuser = (userDetails) => {
     return new Promise(async (resolve, reject) => {
@@ -194,4 +199,35 @@ const verifyToken = (requestHeader) => {
 
 }
 
-module.exports = { signUpuser, userActivation, getLoginToken, getLogin }
+const getForwardPw = (email) => {
+    return new Promise(async (resolve, reject) => {
+        let valide = {};
+        let validate = emailSchema.validate(email);
+        if (validate.error) {
+            valide.error = validate.error.message;
+            reject(validation(valide));
+        } else {
+            try {
+                let retPw = await dbOps.getPw(email.email);
+                if (retPw.error == false) {
+                    try {
+                        let result = await mail.sendMail(retPw.msg);
+                        if (result.error == false) {
+                            result.msg = 'Password Sent To Your Email..';
+                            resolve(result);
+                        }
+                    } catch (err) {
+                        reject(err);
+                    }
+                } else {
+                    reject(retPw);
+                }
+            }
+            catch (err) {
+                reject(err);
+            }
+        }
+    })
+}
+
+module.exports = { signUpuser, userActivation, getLoginToken, getLogin, getForwardPw }

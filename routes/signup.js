@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
         if (response.error == false) {
             res.status(200).send(response);
         } else {
-            res.status(400).send(response);
+            res.status(200).send(response);
         }
     } catch (err) {
         res.status(200).send(err);
