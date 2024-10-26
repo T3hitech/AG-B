@@ -23,8 +23,8 @@ router.post("/payment", async (req, res) => {
                 },
             ],
             mode: "payment",
-            success_url: `http://localhost:4200/signupactivation?search=${Buffer.from(signUpUser).toString('base64')}`,
-            cancel_url: `http://localhost:4200/notfound`,
+            success_url: `https://app-aqwebsite-demo-cenus-001.azurewebsites.net/signupactivation?search=${Buffer.from(signUpUser).toString('base64')}`,
+            cancel_url: `https://app-aqwebsite-demo-cenus-001.azurewebsites.net/notfound`,
         });
         // console.log(session.url);
         res.status(200).send({ url: session.url });
