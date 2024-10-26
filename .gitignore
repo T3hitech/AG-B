@@ -22,7 +22,6 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
-.env
 
 # IDE - VSCode
 .vscode/*
