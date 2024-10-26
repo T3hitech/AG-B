@@ -8,7 +8,11 @@ const kDB = knex({
         user: process.env.DBUSER,
         password: process.env.DBPASSWORD,
         database: process.env.DBDATABASE,
-        port: process.env.DBPORT
+        port: process.env.DBPORT,
+        ssl: {
+        // Verify SSL certificate
+        rejectUnauthorized: true
+    }
     }
 });
 
