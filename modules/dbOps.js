@@ -9,8 +9,11 @@ const kDB = knex({
         user: process.env.DBUSER,
         password: process.env.DBPASSWORD,
         database: process.env.DBDATABASE,
-        port: process.env.DBPORT
+        port: process.env.DBPORT,
+        ssl: {
+            ca: fs.readFileSync("./ssl/DigiCertGlobalRootCA.crt.pem") // Ensure you have the actual CA certificate file path here
     }
+}
 });
 
 const pushUser = (user) => {
