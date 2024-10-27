@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "npm install && mkdir dist && npx copyfiles index.js routes/**/* utils/**/* modules/**/* package.json .env dist && echo 'Build files copied to dist/'",
+    "build": "npm install && mkdir dist && npx copyfiles index.js routes/**/* utils/**/* modules/**/* ssl/**/* package.json .env dist && echo 'Build files copied to dist/'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

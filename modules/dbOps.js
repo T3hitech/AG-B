@@ -1,4 +1,5 @@
 const knex = require('knex');
+const fs = require('fs');
 const { validation } = require('../utils/validation');
 
 const kDB = knex({
@@ -8,11 +9,7 @@ const kDB = knex({
         user: process.env.DBUSER,
         password: process.env.DBPASSWORD,
         database: process.env.DBDATABASE,
-        port: process.env.DBPORT,
-        ssl: {
-        // Verify SSL certificate
-        rejectUnauthorized: true
-    }
+        port: process.env.DBPORT
     }
 });
 
